@@ -8,16 +8,18 @@ if [ -z ${USER_ID+x} ]; then USER_ID=1000; fi
 if [ -z ${GROUP_ID+x} ]; then GROUP_ID=1000; fi
 
 # ccache
-export CCACHE_DIR=/tmp/ccache
+export CCACHE_DIR=/mnt/aosp/ccache
 export USE_CCACHE=1
 
-groupadd -g 1000 -r aosp
-useradd -u 1000 --create-home -r -g aosp aosp
+msg="docker_entrypoint: Creating user UID/GID [$USER_ID/$GROUP_ID]" && echo $msg
+groupadd -g $GROUP_ID -r aosp && \
+useradd -u $USER_ID --create-home -r -g aosp aosp
+echo "$msg - done"
 
 cp /root/.gitconfig /home/aosp/.gitconfig
 chown aosp:aosp /home/aosp/.gitconfig
 
-mkdir -p /tmp/ccache /aosp
-chown aosp:aosp /tmp/ccache /aosp
+mkdir -p /mnt/aosp/ccache /aosp
+chown aosp:aosp /mnt/aosp/ccache /aosp
 export HOME=/home/aosp
-sudo -E -u aosp /bin/bash
+exec sudo -E -u aosp /bin/bash

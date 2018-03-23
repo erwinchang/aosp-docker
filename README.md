@@ -6,7 +6,7 @@ docker build aosp 4.4.2
 
 docker run
 ```
-docker run -v /mnt/ssd3:/mnt/ssd3 -v /mnt/ssd3/ccache:/tmp/ccache -it --rm --name aosp erwinchang/aosp-442 /bin/bash
+docker run -v $HOME:/mnt/aosp -v $HOME/ssd1:/mnt/ssd1 --rm --name aosp erwinchang/aosp-442 /bin/bash
 ```
 
 enable aosp ccache
@@ -14,7 +14,7 @@ enable aosp ccache
 prebuilts/misc/linux-x86/ccache/ccache -M 10G
 source build/envsetup.sh
 lunch aosp_arm-eng
-make -j $cpus
+make -j4
 ```
 
 ## 參考來源

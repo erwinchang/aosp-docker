@@ -18,6 +18,9 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y flex\
  && DEBIAN_FRONTEND=noninteractive apt-get install -y zip unzip\
  && DEBIAN_FRONTEND=noninteractive apt-get install -y libxml2-utils\
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y bsdiff\
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y gnupg gperf lib32ncurses5-dev\
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y libswitch-perl\
 #for zlib.so.1
  && DEBIAN_FRONTEND=noninteractive apt-get install -y lib32z1 libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5\
 #kernel mkimage
@@ -38,13 +41,13 @@ RUN update-alternatives --install "/usr/bin/javap" "javap" "/usr/lib/jvm/jdk1.6.
 RUN update-alternatives --install "/usr/bin/javadoc" "javadoc" "/usr/lib/jvm/jdk1.6.0_45/bin/javadoc" 1
 RUN update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/jdk1.6.0_45/bin/jar" 1
 
-
 #bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-VOLUME ["/tmp/ccache", "/mnt/ssd3"]
+VOLUME ["/mnt/ssd1", "/mnt/aosp"]
 
-WORKDIR /aosp
+WORKDIR /mnt/aosp
 
 COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
-#ENTRYPOINT ["/root/docker_entrypoint.sh"]
+RUN chmod +x /root/docker_entrypoint.sh
+ENTRYPOINT ["/root/docker_entrypoint.sh"]
