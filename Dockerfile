@@ -25,7 +25,12 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y lib32z1 libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5\
 #kernel mkimage
  && DEBIAN_FRONTEND=noninteractive apt-get install -y u-boot-tools \
+#external/mtd-utils
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y uuid-dev zlib1g-dev liblzo2-dev \
  && rm -rf /var/lib/apt/lists/*
+
+#fix zconf.h error
+RUN ln -s /usr/include/x86_64-linux-gnu/zconf.h /usr/include
 
 # All builds will be done by user aosp
 COPY gitconfig /root/.gitconfig
