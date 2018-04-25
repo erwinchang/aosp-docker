@@ -27,6 +27,8 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y u-boot-tools \
 #external/mtd-utils
  && DEBIAN_FRONTEND=noninteractive apt-get install -y uuid-dev zlib1g-dev liblzo2-dev \
+#fix build jht3 uboot ,/bin/sh: bc: command not found
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y bc \
  && rm -rf /var/lib/apt/lists/*
 
 #fix zconf.h error

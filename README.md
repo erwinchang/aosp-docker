@@ -1,4 +1,4 @@
-#aosp-442
+# aosp-442
 
 docker build aosp 4.4.2
 
@@ -6,7 +6,7 @@ docker build aosp 4.4.2
 
 docker run
 ```
-docker run -v $HOME:/mnt/aosp -v $HOME/ssd1:/mnt/ssd1 --rm --name aosp erwinchang/aosp-442 /bin/bash
+docker run -v $HOME:/mnt/aosp -v $HOME/ssd1:/mnt/ssd1 -it --rm --name aosp erwinchang/aosp-442 /bin/bash
 ```
 
 enable aosp ccache
