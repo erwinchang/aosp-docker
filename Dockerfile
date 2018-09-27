@@ -51,10 +51,9 @@ RUN update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/jdk1.6.0_45
 #bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-VOLUME ["/mnt/ssd1", "/mnt/aosp"]
-
 WORKDIR /mnt/aosp
 
 COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
+COPY utils/aosp_bashrc.sh /root/aosp_bashrc.sh
 RUN chmod +x /root/docker_entrypoint.sh
 ENTRYPOINT ["/root/docker_entrypoint.sh"]
