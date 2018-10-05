@@ -29,6 +29,8 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y uuid-dev zlib1g-dev liblzo2-dev \
 #fix build jht3 uboot ,/bin/sh: bc: command not found
  && DEBIAN_FRONTEND=noninteractive apt-get install -y bc \
+#for rv1108
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y pkg-config cmake automake\
  && rm -rf /var/lib/apt/lists/*
 
 #fix zconf.h error
@@ -47,6 +49,8 @@ RUN update-alternatives --install "/usr/bin/javah" "javah" "/usr/lib/jvm/jdk1.6.
 RUN update-alternatives --install "/usr/bin/javap" "javap" "/usr/lib/jvm/jdk1.6.0_45/bin/javap" 1
 RUN update-alternatives --install "/usr/bin/javadoc" "javadoc" "/usr/lib/jvm/jdk1.6.0_45/bin/javadoc" 1
 RUN update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/jdk1.6.0_45/bin/jar" 1
+
+
 
 #bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
