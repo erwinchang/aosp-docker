@@ -29,8 +29,10 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y uuid-dev zlib1g-dev liblzo2-dev \
 #fix build jht3 uboot ,/bin/sh: bc: command not found
  && DEBIAN_FRONTEND=noninteractive apt-get install -y bc \
-#for rv1108
- && DEBIAN_FRONTEND=noninteractive apt-get install -y pkg-config cmake automake\
+#for rv1108 sdk tools
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y pkg-config cmake automake \
+#fix rv1108 build error
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y libtool lzop \
  && rm -rf /var/lib/apt/lists/*
 
 #fix zconf.h error
