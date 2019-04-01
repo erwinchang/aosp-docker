@@ -3,7 +3,7 @@ FROM ubuntu:trusty-20180112
 MAINTAINER Erwin "m9207216@gmail.com"
 
 #RUN linux32 sed -i 's/archive.ubuntu.com/tw.archive.ubuntu.com/g' /etc/apt/sources.list
-RUN linux32 sed -i 's/archive.ubuntu.com/ubuntu.stu.edu.tw/g' /etc/apt/sources.list
+#RUN linux32 sed -i 's/archive.ubuntu.com/ubuntu.stu.edu.tw/g' /etc/apt/sources.list
 RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && apt-get update \
@@ -33,6 +33,9 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y pkg-config cmake automake \
 #fix rv1108 build error
  && DEBIAN_FRONTEND=noninteractive apt-get install -y libtool lzop \
+#fix sp8388
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y ccache \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y fakeroot \
  && rm -rf /var/lib/apt/lists/*
 
 #fix zconf.h error
